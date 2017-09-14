@@ -41,9 +41,9 @@ var Table = function(tableNumber) {
 
 //limited to 5
 var tablelist = [];
-for (var i = 0; i < 5; i++) {
-  tablelist.push(new Table(i))
-}
+// for (var i = 0; i < 5; i++) {
+//   tablelist.push(new Table(i))
+// }
 
 var waitlist = [];
 
@@ -55,7 +55,12 @@ var Reservation = function (name, phone, email) {
   }
 }
 
-function addReservation() {
+function addReservation(reserv) {
+  if (tablelist.length > 4) {
+    waitlist.push(reserv);
+  } else {
+    tablelist.push(reserv);
+  }
   //get info from front end
   //then
   //if table list is full
@@ -73,6 +78,7 @@ app.get("/api/tables", function(req, res) {
 // api POST new reservation
 app.post("/api/new", function(req, res) {
   console.log(req.body);
+  addReservation(req.body);
   res.send(req.body);
 });
 
