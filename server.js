@@ -49,6 +49,16 @@ var Reservation = function (name, phone, email) {
   }
 }
 
+function addReservation() {
+  //get info from front end
+  //then
+  //if table list is full
+    //add to wait list
+  //else
+    //add to table list
+}
+
+
 // api GET table list
 app.get("/api/tables", function(req, res) {
   res.json(tablelist);
@@ -56,12 +66,13 @@ app.get("/api/tables", function(req, res) {
 
 // api POST new reservation
 app.post("/api/new", function(req, res) {
-
+  console.log(req.body);
+  res.json(tablelist);
 });
 
 // api GET waitlist
 app.get("/api/waitlist", function(req, res) {
-
+  res.json(waitlist);
 });
 
 // Starts the server to begin listening
