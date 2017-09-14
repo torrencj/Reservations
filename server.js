@@ -18,39 +18,50 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Routes
 // =============================================================
 
-// Basic route that sends the user first to the AJAX Page
+// Web server routes
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
 
-// Search for Specific Character (or all characters) - provides JSON
-app.get("/api/:characters?", function(req, res) {
-  var chosen = req.params.characters;
-
-  if (chosen) {
-    console.log(chosen);
-
-    for (var i = 0; i < characters.length; i++) {
-      if (chosen === characters[i].routeName) {
-        return res.json(characters[i]);
-      }
-    }
-    return res.json(false);
+// Logic
+// =============================================================
+var Table = function(tableNumber) {
+  return {
+    tableNumber,
+    seats:5
   }
-  return res.json(characters);
+}
+
+//limited to 5
+var tablelist = [];
+for (var i = 0; i < 5; i++) {
+  tablelist.push(new Table(i))
+}
+
+var waitlist = [];
+
+var Reservation = function (name, phone, email) {
+  return {
+    name,
+    phone,
+    email
+  }
+}
+
+// api GET table list
+app.get("/api/tables", function(req, res) {
+  res.json(tablelist);
 });
 
-// Create New Characters - takes in JSON input
+// api POST new reservation
 app.post("/api/new", function(req, res) {
-  var newcharacter = req.body;
-  newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
 
-  console.log(newcharacter);
+});
 
-  characters.push(newcharacter);
+// api GET waitlist
+app.get("/api/waitlist", function(req, res) {
 
-  res.json(newcharacter);
 });
 
 // Starts the server to begin listening
