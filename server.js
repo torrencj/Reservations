@@ -73,7 +73,7 @@ app.get("/api/tables", function(req, res) {
 // api POST new reservation
 app.post("/api/new", function(req, res) {
   console.log(req.body);
-  res.json(tablelist);
+  res.send(req.body);
 });
 
 // api GET waitlist
