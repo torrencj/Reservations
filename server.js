@@ -30,6 +30,7 @@ app.get("/tables", function(req, res) {
 });
 
 
+
 // Logic
 // =============================================================
 var Table = function(tableNumber) {
