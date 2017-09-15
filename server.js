@@ -61,12 +61,6 @@ function addReservation(reserv) {
   } else {
     tablelist.push(reserv);
   }
-  //get info from front end
-  //then
-  //if table list is full
-    //add to wait list
-  //else
-    //add to table list
 }
 
 
