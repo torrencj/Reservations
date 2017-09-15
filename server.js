@@ -19,17 +19,39 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Routes
 // =============================================================
 
-// Web server routes
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
-app.get("/reserve", function(req, res) {
-  res.sendFile(path.join(__dirname, "reserve.html"));
-});
-app.get("/tables", function(req, res) {
-  res.sendFile(path.join(__dirname, "tables.html"));
-});
+var pages = ["", "reserve", "tables", "404"];
 
+// var pages = [
+//   {
+//     name: "" //index.html
+//   },
+//   {
+//
+//   }
+// ]
+
+// // Web server routes
+// app.get("/", function(req, res) {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
+//
+// app.get("/reserve", function(req, res) {
+//   res.sendFile(path.join(__dirname, "reserve.html"));
+// });
+//
+// app.get("/tables", function(req, res) {
+//   res.sendFile(path.join(__dirname, "tables.html"));
+// });
+
+app.get("/:page?", function (req, res) {
+  var page = req.params.page;
+  var requested = pages.indexOf(page);
+  if (requested != -1) {
+    res.sendFile(path.join(__dirname, pages[requested]));
+  } else {
+    res.sendFile(path.join(__dirname, "404.html"));
+  }
+});
 
 
 // Logic
@@ -59,8 +81,8 @@ function addReservation(reserv) {
 
 
 // api GET table list
-app.get("/api/tables", function(req, res) {
-  res.json(tablelist);
+app.get("/api/tables", function(request, response) {
+  response.json(tablelist);
 });
 
 // api POST new reservation
