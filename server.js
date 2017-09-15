@@ -98,7 +98,7 @@ app.get("/api/waitlist", function(req, res) {
 });
 
 app.post("/api/sms", function(req, res) {
-  res.end(req.body)
+  res.json(req.body)
   // sendSMS(req.body.msg, req.body.toPhone).then( resp => {
   //   res.end(resp);
   // })
