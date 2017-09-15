@@ -1,8 +1,9 @@
 // Dependencies
 // =============================================================
-var express     = require("express");
-var bodyParser  = require("body-parser");
-var path        = require("path");
+var express       = require("express");
+var bodyParser    = require("body-parser");
+var path          = require("path");
+const Reservation = require('./Reservation')
 
 // Sets up the Express App
 // =============================================================
@@ -47,14 +48,6 @@ var tablelist = [];
 // }
 
 var waitlist = [];
-
-var Reservation = function (name, phone, email) {
-  return {
-    name,
-    phone,
-    email
-  }
-}
 
 function addReservation(reserv) {
   if (tablelist.length > 4) {
