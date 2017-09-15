@@ -67,10 +67,8 @@
 
 		var currentURL = window.location.origin;
 
-		// $.ajax({url: currentURL + "/api/tables", method: "GET"})		
-		// 	.done(function(tableData) {
-
-			$.get(url: currentURL + "/api/tables", function(tableData){
+		$.ajax({url: currentURL + "/api/tables", method: "GET"})		
+			.done(function(tableData) {
 
 				console.log("------------------------------------");
 				console.log("URL: " + currentURL + "/api/tables");
