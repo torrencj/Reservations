@@ -45,7 +45,12 @@ var pages = ["/", "/reserve", "/tables", "/404"];
 
 app.get("/:page?", function (req, res) {
   // var page = req.params.page;
-  res.end(req.params.page);
+  if (req.params.page) {
+    res.end(req.params.page);
+  } else {
+    res.end("YOU HIT THE MAIN PAGE!!! WOOO.....")
+  }
+
   // var requested = pages.indexOf(page);
   //
   // if (requested != -1) {
