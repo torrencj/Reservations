@@ -78,7 +78,7 @@
 					$('#tableSection').append(tableSection);
 
 					var tableNumber = i + 1;
-                    $("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
+                    $("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerName + "</h2>");
 				}
 			});
 	}
@@ -101,7 +101,7 @@
 					$('#waitlistSection').append(waitlistSection);
 
                     var tableNumber = i + 1;
-                    $("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData[i].customerID + "</h2>");
+                    $("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData[i].customerName + "</h2>");
 				}
 			});
 	}
