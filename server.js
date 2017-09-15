@@ -97,9 +97,10 @@ app.get("/api/waitlist", function(req, res) {
   res.json(waitlist);
 });
 
-app.get("/api/sms", function(req, res) {
-  sendSMS(body, toPhone);
-  res.json(waitlist);
+app.post("/api/sms", function(req, res) {
+  sendSMS(req.body.msg, req.body.toPhone).then( resp => {
+    res.end(resp);
+  })
 });
 
 // Starts the server to begin listening
