@@ -45,7 +45,7 @@ var pages = ["/", "/reserve", "/tables", "/404"];
 
 app.get("/:page?", function (req, res) {
   var page = req.params.page;
-  res.send(req.params.page);
+  res.json(req.params.page);
   // var requested = pages.indexOf(page);
   //
   // if (requested != -1) {
