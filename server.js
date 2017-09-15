@@ -69,12 +69,15 @@ function addReservation(reserv) {
 }
 
 function sendSMS(body, toPhone) {
-  client.messages.create({
-      body: body,
-      to: '+' + toPhone,  // Text this number
-      from: '+18302132871' // From a valid Twilio number
-  })
-  .then((message) => console.log(message.sid));
+  return new Promise(function(resolve, reject) {
+      client.messages.create({
+          body: body,
+          to: '+' + toPhone,  // Text this number
+          from: '+18302132871' // From a valid Twilio number
+      }).then(msg => {
+        resolve(msg.sid)
+      });
+  });
 }
 
 // api GET table list
