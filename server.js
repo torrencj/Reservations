@@ -37,7 +37,7 @@ app.get("/tables", function(req, res) {
 
 
 app.get("/:page", function (req, res) {
-  res.sendFile(path.join(__dirname, "test404.html"));
+  res.sendFile(path.join(__dirname, "404.html"));
 });
 
 
