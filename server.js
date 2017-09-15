@@ -3,7 +3,15 @@
 var express       = require("express");
 var bodyParser    = require("body-parser");
 var path          = require("path");
+var twilio        = require('twilio');
+
 const Reservation = require('./Reservation')
+
+// Set up Twillo
+// =============================================================
+var accountSid = 'AC500c53a6560908ce75907dc5e14e75eb'; // Your Account SID from www.twilio.com/console
+var authToken = '300acbb52b21a6e0e722e4328c5eb7d9';   // Your Auth Token from www.twilio.com/console
+var client = new twilio(accountSid, authToken);
 
 // Sets up the Express App
 // =============================================================
@@ -34,8 +42,6 @@ app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
 });
 
-
-
 app.get("/:page", function (req, res) {
   res.sendFile(path.join(__dirname, "404.html"));
 });
@@ -62,6 +68,14 @@ function addReservation(reserv) {
   }
 }
 
+function sendSMS(body, toPhone) {
+  client.messages.create({
+      body: body,
+      to: '+' + toPhone,  // Text this number
+      from: '+18302132871' // From a valid Twilio number
+  })
+  .then((message) => console.log(message.sid));
+}
 
 // api GET table list
 app.get("/api/tables", function(request, response) {
@@ -77,6 +91,11 @@ app.post("/api/new", function(req, res) {
 
 // api GET waitlist
 app.get("/api/waitlist", function(req, res) {
+  res.json(waitlist);
+});
+
+app.get("/api/sms", function(req, res) {
+  sendSMS(body, toPhone);
   res.json(waitlist);
 });
 
