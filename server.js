@@ -70,11 +70,13 @@ function addReservation(reserv) {
 
 function sendSMS(body, toPhone) {
   return new Promise(function(resolve, reject) {
+    console.log("sending "+body+" to "+toPhone);
       client.messages.create({
           body: body,
           to: '+' + toPhone,  // Text this number
           from: '+18302132871' // From a valid Twilio number
       }).then(msg => {
+        console.log(msg.sid);
         resolve(msg.sid)
       });
   });
@@ -98,10 +100,11 @@ app.get("/api/waitlist", function(req, res) {
 });
 
 app.post("/api/sms", function(req, res) {
-  res.send(req.data)
-  // sendSMS(req.body.msg, req.body.toPhone).then( resp => {
-  //   res.end(resp);
-  // })
+  // res.json(req.body.msg, req.body.toPhone)
+  sendSMS(req.body.msg, req.body.toPhone).then( resp => {
+    console.log("sent!");
+    res.end(resp);
+  })
 });
 
 // Starts the server to begin listening
