@@ -21,45 +21,23 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 var pages = ["", "reserve", "tables", "404"];
 
-// var pages = [
-//   {
-//     name: "" //index.html
-//   },
-//   {
-//
-//   }
-// ]
+// Web server routes
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
-// // Web server routes
-// app.get("/", function(req, res) {
-//   res.sendFile(path.join(__dirname, "index.html"));
-// });
-//
-// app.get("/reserve", function(req, res) {
-//   res.sendFile(path.join(__dirname, "reserve.html"));
-// });
-//
-// app.get("/tables", function(req, res) {
-//   res.sendFile(path.join(__dirname, "tables.html"));
-// });
+app.get("/reserve", function(req, res) {
+  res.sendFile(path.join(__dirname, "reserve.html"));
+});
 
-app.get("/:page?", function (req, res) {
-  var requested = pages.indexOf(req.params.page);
-
-  if (requested != -1) {
-    res.sendFile(path.join(__dirname, pages[requested]+'.html'));
-  } else {
-    res.sendFile(path.join(__dirname, "test404.html"));
-  }
+app.get("/tables", function(req, res) {
+  res.sendFile(path.join(__dirname, "tables.html"));
+});
 
 
-  // if (page) {
-  //   res.end(req.params.page);
-  // } else {
-  //   res.end("YOU HIT THE MAIN PAGE!!! WOOO.....")
-  // }
 
-
+app.get("/:page", function (req, res) {
+  res.sendFile(path.join(__dirname, "test404.html"));
 });
 
 
@@ -74,10 +52,6 @@ var Table = function(tableNumber) {
 
 //limited to 5
 var tablelist = [];
-// for (var i = 0; i < 5; i++) {
-//   tablelist.push(new Table(i))
-// }
-
 var waitlist = [];
 
 function addReservation(reserv) {
