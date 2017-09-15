@@ -19,7 +19,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Routes
 // =============================================================
 
-var pages = ["/", "/reserve", "/tables", "/404"];
+var pages = ["", "reserve", "tables", "404"];
 
 // var pages = [
 //   {
@@ -44,20 +44,22 @@ var pages = ["/", "/reserve", "/tables", "/404"];
 // });
 
 app.get("/:page?", function (req, res) {
-  // var page = req.params.page;
-  if (req.params.page) {
-    res.end(req.params.page);
+  var requested = pages.indexOf(req.params.page);
+
+  if (requested != -1) {
+    res.sendFile(path.join(__dirname, pages[requested]+'.html'));
   } else {
-    res.end("YOU HIT THE MAIN PAGE!!! WOOO.....")
+    res.sendFile(path.join(__dirname, "test404.html"));
   }
 
-  // var requested = pages.indexOf(page);
-  //
-  // if (requested != -1) {
-  //   res.sendFile(path.join(__dirname, pages[requested]));
+
+  // if (page) {
+  //   res.end(req.params.page);
   // } else {
-  //   res.sendFile(path.join(__dirname, "test404.html"));
+  //   res.end("YOU HIT THE MAIN PAGE!!! WOOO.....")
   // }
+
+
 });
 
 
